@@ -328,7 +328,7 @@ class AmazonS3 {
 			throw new InvalidArgumentException(__('You must specify the file you are fetching (e.g remote_dir/file.txt)'));
 		}
 		
-		$this->file =  ($this->name ? $this->name : $file);
+		$this->file =  ($rename ? $rename : $file);
 	}
 	
 /**
