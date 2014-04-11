@@ -114,15 +114,15 @@ class AmazonS3 {
  *
  * @return void
  * @author Rob Mcvey
+ * @modified Cristian Haunsen
  **/
-	public function put($localPath , $remoteDir = null) {
-
+	public function put($localPath , $remoteDir = null, $rename = null) {
 		// Base filename
 		$file = basename($localPath);
 
 		// File remote/local files
 		$this->checkLocalPath($localPath);
-		$this->checkFile($file);
+		$this->checkFile($file, $rename);
 		$this->checkRemoteDir($remoteDir);
 		
 		// Signature
@@ -322,12 +322,13 @@ class AmazonS3 {
  * @return void
  * @author Rob Mcvey
  **/
-	public function checkFile($file) {
-		$this->file = $file;
+	public function checkFile($file, $rename) {
 		// Set the target and local path to where we're saving
-		if (empty($this->file)) {
+		if (empty($file)) {
 			throw new InvalidArgumentException(__('You must specify the file you are fetching (e.g remote_dir/file.txt)'));
 		}
+		
+		$this->file =  ($this->name ? $this->name : $file);
 	}
 	
 /**
