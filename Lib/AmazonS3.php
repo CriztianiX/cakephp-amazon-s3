@@ -322,7 +322,7 @@ class AmazonS3 {
  * @return void
  * @author Rob Mcvey
  **/
-	public function checkFile($file, $rename) {
+	public function checkFile($file, $rename = null) {
 		// Set the target and local path to where we're saving
 		if (empty($file)) {
 			throw new InvalidArgumentException(__('You must specify the file you are fetching (e.g remote_dir/file.txt)'));
